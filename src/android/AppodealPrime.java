@@ -74,7 +74,7 @@ public class AppodealPrime extends CordovaPlugin {
                 true);
             AdBase.initialize(this);
         } else if (Actions.CACHE.equals(actionKey)) {
-            switch (key) {
+            switch (action.getAdType()) {
                 case Appodeal.INTERSTITIAL:
                     InterstitialAd.executeInterstitialCacheAction(action,CallbackContext);
                 break;
