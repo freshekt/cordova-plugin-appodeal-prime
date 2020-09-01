@@ -38,25 +38,7 @@ public abstract class AdBase {
         return ads.get(id);
     }
 
-    public static boolean executeInterstitialCacheAction(Action action, CallbackContext callbackContext) {
-        plugin.cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-                InterstitialAd interstitialAd = (InterstitialAd) action.getAd();
-                if (interstitialAd == null) {
-                    interstitialAd = new InterstitialAd(
-                            action.optId()
-                    );
-                }
-                interstitialAd.cache(Appodeal.INTERSTITIAL);
-                PluginResult result = new PluginResult(PluginResult.Status.OK, "");
-                callbackContext.sendPluginResult(result);
-            }
-        });
-
-        return true;
-    }
 
     public void cache(int adType){
 
