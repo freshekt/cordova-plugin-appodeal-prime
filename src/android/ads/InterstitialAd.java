@@ -11,7 +11,7 @@ import com.appodealprime.Action;
 import com.appodealprime.Events;
 
 public class InterstitialAd extends AdBase {
-    private static final String TAG = "AP::InterstitialAd";
+    public static final String TAG = "AP::InterstitialAd";
 
     InterstitialAd(int id) {
         super(id);
@@ -37,25 +37,7 @@ public class InterstitialAd extends AdBase {
         return true;
     }
 
-    public static boolean executeInterstitialCacheAction(Action action, CallbackContext callbackContext) {
-        plugin.cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-                InterstitialAd interstitialAd = (InterstitialAd) action.getAd();
-                if (interstitialAd == null) {
-                    interstitialAd = new InterstitialAd(
-                            action.optId()
-                    );
-                }
-                interstitialAd.cache(Appodeal.INTERSTITIAL);
-                PluginResult result = new PluginResult(PluginResult.Status.OK, "");
-                callbackContext.sendPluginResult(result);
-            }
-        });
-
-        return true;
-    }
 
     public void show() {
         Appodeal.show(plugin.cordova.getActivity(), Appodeal.INTERSTITIAL);

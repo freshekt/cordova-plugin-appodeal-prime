@@ -73,17 +73,18 @@ public class AppodealPrime extends CordovaPlugin {
                 Appodeal.BANNER | Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO,
                 true);
             AdBase.initialize(this);
+            return true;
         } else if (Actions.CACHE.equals(actionKey)) {
             switch (action.getAdType()) {
                 case Appodeal.INTERSTITIAL:
-                    InterstitialAd.executeInterstitialCacheAction(action,CallbackContext);
+                    InterstitialAd.executeInterstitialCacheAction(action,callbackContext);
                 break;
                 
             
                 default:
                     break;
             }
-            AdBase.cache(action, callbackContext);
+            return true;
         } 
          else if (Actions.BANNER_SHOW.equals(actionKey)) {
             return BannerAd.executeShowAction(action, callbackContext);

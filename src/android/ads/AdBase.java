@@ -1,12 +1,19 @@
 package com.appodealprime.ads;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.InterstitialCallbacks;
+import com.appodealprime.Action;
 import com.appodealprime.AppodealPrime;
+import com.appodealprime.Events;
 
 
 public abstract class AdBase {
@@ -31,6 +38,25 @@ public abstract class AdBase {
         return ads.get(id);
     }
 
+    public static boolean executeInterstitialCacheAction(Action action, CallbackContext callbackContext) {
+        plugin.cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                InterstitialAd interstitialAd = (InterstitialAd) action.getAd();
+                if (interstitialAd == null) {
+                    interstitialAd = new InterstitialAd(
+                            action.optId()
+                    );
+                }
+                interstitialAd.cache(Appodeal.INTERSTITIAL);
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "");
+                callbackContext.sendPluginResult(result);
+            }
+        });
+
+        return true;
+    }
 
     public void cache(int adType){
 
@@ -39,37 +65,37 @@ public abstract class AdBase {
                     Appodeal.setInterstitialCallbacks(new InterstitialCallbacks() {
                         @Override
                         public void onInterstitialLoaded(boolean b) {
-                            Log.d(TAG, "on Interstitial loaded");
+                            Log.d(InterstitialAd.TAG, "on Interstitial loaded");
                             plugin.emit(Events.INTERSTITIAL_LOAD);
                         }
             
                         @Override
                         public void onInterstitialFailedToLoad() {
-                            Log.d(TAG, "Interstitial Failed to load");
+                            Log.d(InterstitialAd.TAG, "Interstitial Failed to load");
                             plugin.emit(Events.INTERSTITIAL_LOAD_FAIL);
                         }
             
                         @Override
                         public void onInterstitialShown() {
-                            Log.d(TAG, "Interstitial shown");
+                            Log.d(InterstitialAd.TAG, "Interstitial shown");
                             plugin.emit(Events.INTERSTITIAL_SHOW);
                         }
             
                         @Override
                         public void onInterstitialClicked() {
-                            Log.d(TAG, "Interstitial clicked");
+                            Log.d(InterstitialAd.TAG, "Interstitial clicked");
                             plugin.emit(Events.INTERSTITIAL_CLICK);
                         }
             
                         @Override
                         public void onInterstitialClosed() {
-                            Log.d(TAG, "Interstitial closed");
+                            Log.d(InterstitialAd.TAG, "Interstitial closed");
                             plugin.emit(Events.INTERSTITIAL_CLOSE);
                         }
             
                         @Override
                         public void onInterstitialExpired() {
-                            Log.d(TAG, "Interstitial expired");
+                            Log.d(InterstitialAd.TAG, "Interstitial expired");
                         }
                     });
                 break;
