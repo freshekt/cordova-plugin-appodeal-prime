@@ -21,7 +21,6 @@
 	<dependency id="cordova-custom-config"/>
 
 	<platform name="android">
-        <preference name="ANDROID_APP_KEY" />
         <preference name="ANDROID_SUPPORT_RECYCLERVIEW_VERSION" default="27+" />
 	    <config-file parent="/*" target="res/xml/config.xml">
 			<feature name="AppodealPrime">
@@ -36,9 +35,7 @@
 			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	    </config-file>
 	    <config-file parent="/manifest/application" target="AndroidManifest.xml">
-	    	<meta-data
-	            android:name="com.appodeal.ads.appodealprime.APP_KEY"
-	            android:value="$ANDROID_APP_KEY" />
+	    	
 	        <uses-library
 			     android:name="org.apache.http.legacy"
 			     android:required="false" />
@@ -75,78 +72,5 @@
         <source-file src="src/android/ads/RewardVideo.java" target-dir="src/com/appodealprime/ads" />
 	</platform>
 
-	<platform name="ios">
-        <preference name="IOS_APP_KEY" />
-		<config-file target="config.xml" parent="/*" >
-			<feature name="AppodealPrime">
-				<param name="ios-package" value="AppodealPrime" />
-			</feature>
-		</config-file>
-        <config-file target="*-Info.plist" parent="ApodealApplicationIdentifier">
-            <string>$IOS_APP_KEY</string>
-        </config-file>
-		<config-file target="*-Info.plist" parent="NSAppTransportSecurity">
-		  <dict>
-		      <key>NSAllowsArbitraryLoads</key>
-		      <true/>
-		      <key>NSAllowsArbitraryLoadsInWebContent</key>
-		      <true/>
-		  </dict>
-		</config-file>
-		<config-file target="*-Info.plist" parent="NSCalendarsUsageDescription">
-		  <string>We are using the Calendar features to serve ads to the app</string>
-		</config-file>
-		<config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
-		  <string>We are using the Bluetooth features to serve ads to the app</string>
-		</config-file>
-		<config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-		  <string>We are using the Location features to serve ads to the app</string>
-		</config-file>
-		<config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
-		  <string>We are using the Photo features to serve ads to the app</string>
-		</config-file>
-        <!-- <header-file src="src/ios/AppodealPlugin.h"/>
-		<source-file src="src/ios/AppodealPlugin.m"/> -->
-		<header-file src="src/ios/AP-Bridging-Header.h" />
 
-		<framework src="AdSupport.framework"/>
-		<framework src="AudioToolbox.framework"/>
-		<framework src="AVFoundation.framework"/>
-		<framework src="CFNetwork.framework"/>
-		<framework src="CoreGraphics.framework"/>
-		<framework src="CoreImage.framework"/>
-		<framework src="CoreLocation.framework"/>
-		<framework src="CoreMedia.framework"/>
-		<framework src="CoreMotion.framework"/>
-		<framework src="CoreTelephony.framework"/>
-		<framework src="EventKitUI.framework"/>
-		<framework src="GLKit.framework"/>
-		<framework src="ImageIO.framework"/>
-		<framework src="MediaPlayer.framework"/>
-		<framework src="MessageUI.framework"/>
-		<framework src="MobileCoreServices.framework"/>
-		<framework src="QuartzCore.framework"/>
-		<framework src="Security.framework"/>
-		<framework src="StoreKit.framework"/>
-		<framework src="SystemConfiguration.framework"/>
-		<framework src="Twitter.framework"/>
-		<framework src="UIKit.framework"/>
-		<framework src="WebKit.framework"/>
-
-		<framework src="libc++.dylib"/>
-		<framework src="libsqlite3.dylib"/>
-		<framework src="libxml2.2.dylib"/>
-		<framework src="libz.dylib"/>
-
-		<pod name="Appodeal" spec="2.5.9" />
-
-        <source-file src="src/ios/APBase.swift" />
-        <source-file src="src/ios/APBanner.swift" />
-        <source-file src="src/ios/AppodealPrime.swift" />
-        <source-file src="src/ios/APInterstitial.swift" />
-        <source-file src="src/ios/APRewardVideo.swift" />
-        <source-file src="src/ios/APConstants.swift" />
-        <source-file src="src/ios/APNative.swift" />
-
-	</platform>
 </plugin>

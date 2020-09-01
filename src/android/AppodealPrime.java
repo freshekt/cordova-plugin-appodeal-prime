@@ -41,12 +41,7 @@ public class AppodealPrime extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         apiKey = this.getApiKey();
-        Appodeal.initialize(
-                cordova.getActivity(),
-                apiKey,
-                Appodeal.BANNER | Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO,
-                true);
-        AdBase.initialize(this);
+        
     }
 
     @Override
@@ -70,7 +65,27 @@ public class AppodealPrime extends CordovaPlugin {
             }
             emit(Events.READY, data);
             return true;
-        } else if (Actions.BANNER_SHOW.equals(actionKey)) {
+        } else if (Actions.INITIALIZE.equals(actionKey)) {
+            
+            Appodeal.initialize(
+                cordova.getActivity(),
+                action.optAppId() ,
+                Appodeal.BANNER | Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO,
+                true);
+            AdBase.initialize(this);
+        } else if (Actions.CACHE.equals(actionKey)) {
+            switch (key) {
+                case Appodeal.INTERSTITIAL:
+                    InterstitialAd.executeInterstitialCacheAction(action,CallbackContext);
+                break;
+                
+            
+                default:
+                    break;
+            }
+            AdBase.cache(action, callbackContext);
+        } 
+         else if (Actions.BANNER_SHOW.equals(actionKey)) {
             return BannerAd.executeShowAction(action, callbackContext);
         } else if (Actions.BANNER_HIDE.equals(actionKey)) {
             return BannerAd.executeHideAction(action, callbackContext);

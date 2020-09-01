@@ -16,6 +16,14 @@ public class Action {
         return this.opts.optInt("id");
     }
 
+    public String optAppId() {
+        return this.opts.optString("app_id");
+    }
+
+    public int getAdType() {
+        return this.opts.optInt("ad_type");
+    }
+
     public JSONObject optPosition() {
         return this.opts.optJSONObject("position");
     }

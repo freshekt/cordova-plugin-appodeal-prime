@@ -18,4 +18,7 @@ final class Actions {
     static final String NATIVE_HIDE_ALL = "native_hide_all";
     static final String NATIVE_BANNER_SHOW = "native_banner_show";
     static final String NATIVE_NANNER_HIDE = "native_banner_hide";
-}
+    static final String INITIALIZE = "init";
+    static final String CACHE = "cache";
+
+ }
