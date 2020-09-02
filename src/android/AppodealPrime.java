@@ -73,7 +73,7 @@ public class AppodealPrime extends CordovaPlugin {
                     Appodeal.BANNER | Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO,
                     true);
             Appodeal.setAutoCache(Appodeal.INTERSTITIAL, false);
-
+            Appodeal.setLogLevel(com.appodeal.ads.utils.Log.LogLevel.verbose);
             AdBase.initialize(this);
             return true;
         } else if (Actions.CACHE.equals(actionKey)) {
