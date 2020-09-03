@@ -57,7 +57,7 @@
 
 	    <framework src="src/android/dependency_fix.gradle" custom="true" type="gradleReference" />
 	    
-	    <framework src="com.appodeal.ads:sdk:2.7.3.+" />
+	    <framework src="com.appodeal.ads:maxdex:2.5.7" />
 	    <framework src="com.appodeal.optional:flurry-ads:11.6.0" />
 	    <framework src="com.appodeal.optional:flurry-analytics:11.6.0" />
 
